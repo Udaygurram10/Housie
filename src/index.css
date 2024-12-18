@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --header-height: 7rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  position: relative;
+}
+
+@layer components {
+  .ticket-container {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden;
+  }
+
+  .ticket-body {
+    @apply relative bg-white;
+    background-image: 
+      linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+      linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+      linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  }
+
+  .marked-number::before {
+    content: '';
+    @apply absolute inset-1 rounded-full bg-primary-100/50 -z-10;
+  }
+
+  .glass-nav {
+    @apply bg-white/80 backdrop-blur-lg border-b border-gray-200/50;
+  }
+}

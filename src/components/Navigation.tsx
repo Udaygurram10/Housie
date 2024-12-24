@@ -61,9 +61,9 @@ export const Navigation: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center py-3">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-1">
-              housie
+              Housie / Tambola
             </h1>
-            <div className="text-xs text-gray-400 mb-3">built by uday gurram</div>
+            <div className="text-xs text-gray-400 mb-3">Built by Uday Gurram</div>
             <div className="flex space-x-2">
               <NavLink to="/">Host</NavLink>
               <NavLink to="/player">Player</NavLink>

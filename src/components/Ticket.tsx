@@ -20,7 +20,7 @@ export const Ticket: React.FC = () => {
         </div>
 
         {/* Ticket Body */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="ticket-body p-2"
@@ -37,25 +37,30 @@ export const Ticket: React.FC = () => {
                     className={`
                       relative aspect-square flex items-center justify-center bg-white
                       cursor-pointer transition-all duration-200 text-sm
-                      ${num ? 'hover:bg-gray-50' : 'bg-gray-50/50'}
-                      ${markedNumbers.includes(num) ? 'marked-number' : ''}
+                      ${
+                        num
+                          ? `hover:bg-gray-50 ${
+                              markedNumbers.includes(num)
+                                ? 'marked-number glow-effect'
+                                : ''
+                            }`
+                          : 'bg-gray-50/50'
+                      }
                     `}
                   >
                     {num ? (
-                      <>
-                        <span className={`
-                          font-medium
-                          ${markedNumbers.includes(num) ? 'text-primary-600' : 'text-gray-700'}
-                        `}>
-                          {num}
-                        </span>
-                        {markedNumbers.includes(num) && (
-                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div className="w-full h-[1px] bg-primary-500 transform rotate-45" />
-                            <div className="w-full h-[1px] bg-primary-500 transform -rotate-45" />
-                          </div>
-                        )}
-                      </>
+                      <span
+                        className={`
+                          font-medium 
+                          ${
+                            markedNumbers.includes(num)
+                              ? 'text-primary-600 font-bold'
+                              : 'text-gray-700'
+                          }
+                        `}
+                      >
+                        {num}
+                      </span>
                     ) : (
                       <span className="text-transparent text-xs">0</span>
                     )}
@@ -74,7 +79,11 @@ export const Ticket: React.FC = () => {
                 key={pattern}
                 className={`
                   flex items-center justify-between p-2 rounded-md
-                  ${achieved ? 'bg-green-50 text-green-700' : 'bg-gray-50 text-gray-500'}
+                  ${
+                    achieved
+                      ? 'bg-green-50 text-green-700'
+                      : 'bg-gray-50 text-gray-500'
+                  }
                 `}
               >
                 <span className="capitalize font-medium">

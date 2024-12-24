@@ -30,9 +30,25 @@ body {
     background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
   }
 
+  .marked-number {
+    @apply relative border-2 font-bold text-primary-600;
+    border-color: #5A67D8; /* Primary Color */
+    box-shadow: 0 0 10px rgba(90, 103, 216, 0.7), 0 0 20px rgba(90, 103, 216, 0.5);
+    animation: glow 1.5s infinite;
+  }
+
   .marked-number::before {
     content: '';
     @apply absolute inset-1 rounded-full bg-primary-100/50 -z-10;
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(90, 103, 216, 0.5), 0 0 20px rgba(90, 103, 216, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(90, 103, 216, 1), 0 0 30px rgba(90, 103, 216, 0.8);
+    }
   }
 
   .glass-nav {

@@ -6,7 +6,7 @@ export const checkWinningPatterns = (
   const rows = ticket.map(row => 
     row.filter(n => n !== 0 && markedNumbers.includes(n)).length
   );
-  const numbersPerRow = 5; // Each row has exactly 5 numbers
+  const numbersPerRow = ticket[0].filter(n => n !== 0).length;
   
   return {
     earlyFive: markedCount >= 5,

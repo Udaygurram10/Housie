@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '../store/gameStore';
 
 export const NumberBoard: React.FC = () => {
   const { currentNumber, pickedNumbers, pickNumber } = useGameStore();
   const numbers = Array.from({ length: 90 }, (_, i) => i + 1);
+
+  const handlePickNumber = useCallback(() => {
+    pickNumber();
+  }, [pickNumber]);
 
   return (
     <div className="p-4 sm:p-6 bg-white rounded-xl shadow-lg">
@@ -22,7 +26,7 @@ export const NumberBoard: React.FC = () => {
         </motion.div>
         
         <button
-          onClick={pickNumber}
+          onClick={handlePickNumber}
           className="w-full py-3 px-6 bg-primary-500 text-white font-semibold rounded-xl 
                    transition-all duration-200 hover:bg-primary-600 active:transform active:scale-95"
         >

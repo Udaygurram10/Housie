@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { generateTicket } from '../utils/ticketGenerator';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { announceNumber } from '../utils/speechUtils';
 
 interface GameState {
   pickedNumbers: number[];
@@ -31,6 +32,8 @@ export const useGameStore = create<GameState>()(
         const randomIndex = Math.floor(Math.random() * availableNumbers.length);
         const number = availableNumbers[randomIndex];
         
+        announceNumber(number);
+        
         return {
           currentNumber: number,
           pickedNumbers: [...state.pickedNumbers, number],
@@ -38,13 +41,11 @@ export const useGameStore = create<GameState>()(
         };
       }),
       
-      markNumber: (number) => set((state) => {
-        const newMarkedNumbers = state.markedNumbers.includes(number)
+      markNumber: (number) => set((state) => ({
+        markedNumbers: state.markedNumbers.includes(number)
           ? state.markedNumbers.filter(n => n !== number)
-          : [...state.markedNumbers, number];
-        
-        return { markedNumbers: newMarkedNumbers };
-      }),
+          : [...state.markedNumbers, number]
+      })),
       
       resetGame: () => set({
         pickedNumbers: [],
@@ -56,7 +57,18 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: 'housie-game-storage',
-      storage: createJSONStorage(() => localStorage)
+      storage: createJSONStorage(() => localStorage),
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        if (version === 0) {
+          // If we need to migrate from version 0 to 1
+          return {
+            ...persistedState,
+            gameStartTime: null // Add any new fields with default values
+          };
+        }
+        return persistedState as GameState;
+      }
     }
   )
 );
